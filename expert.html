@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OKIAIMX - Expert</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="wrapper">
+  <canvas id="gameCanvas"></canvas>
+  <div id="smallScreenOverlay">
+    <div class="small-screen-message">Screen is too small.<br>Please resize your window to select a mode.</div>
+    <button class="small-screen-back" onclick="backFromSmallScreen()">Back</button>
+  </div>
+  <div id="onlineIndicator" aria-label="virtual online players">
+    <span class="online-dot"></span><span><span id="onlineCount">--</span> online</span>
+  </div>
+  <button id="backBtn" onclick="goMenu()">Main Menu</button>
+  <button id="shareScoreBtn" onclick="shareScore()">Share Score</button>
+</div>
+
+<script>
+  window.GAME_MODE = 'expert';
+</script>
+<script src="script.js" defer></script>
+</body>
+</html>

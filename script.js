@@ -749,9 +749,9 @@ function updateSmallScreenGuard() {
     expertChainActive = false;
     expertChainDirection = null;
     clearSpawnTimers();
-    document.getElementById('backBtn').style.display = 'none';
-    document.getElementById('shareScoreBtn').style.display = 'none';
-    document.getElementById('menuScreen').style.display = 'none';
+    const backBtn = document.getElementById('backBtn'); if (backBtn) backBtn.style.display = 'none';
+    const shareBtn = document.getElementById('shareScoreBtn'); if (shareBtn) shareBtn.style.display = 'none';
+    const menu = document.getElementById('menuScreen'); if (menu) menu.style.display = 'none';
   }
 }
 
@@ -763,13 +763,13 @@ function backFromSmallScreen() {
   expertChainActive = false;
   expertChainDirection = null;
   clearSpawnTimers();
-  document.getElementById('backBtn').style.display = 'none';
-  document.getElementById('shareScoreBtn').style.display = 'none';
+  const backBtn = document.getElementById('backBtn'); if (backBtn) backBtn.style.display = 'none';
+  const shareBtn = document.getElementById('shareScoreBtn'); if (shareBtn) shareBtn.style.display = 'none';
 
   if (isTooSmallForPcPlay()) {
-    document.getElementById('menuScreen').style.display = 'none';
+    const menu = document.getElementById('menuScreen'); if (menu) menu.style.display = 'none';
   } else {
-    document.getElementById('menuScreen').style.display = 'flex';
+    const menu = document.getElementById('menuScreen'); if (menu) menu.style.display = 'flex';
   }
   updateSmallScreenGuard();
 }
@@ -906,9 +906,9 @@ function startGame(mode) {
   unlockClickAudio();
   gameMode = mode; score = 0; gameRunning = true;
   loadModeHiScore(mode);
-  document.getElementById('menuScreen').style.display = 'none';
-  document.getElementById('backBtn').style.display = 'block';
-  document.getElementById('shareScoreBtn').style.display = 'block';
+  const menu = document.getElementById('menuScreen'); if (menu) menu.style.display = 'none';
+  const backBtn = document.getElementById('backBtn'); if (backBtn) backBtn.style.display = 'block';
+  const shareBtn = document.getElementById('shareScoreBtn'); if (shareBtn) shareBtn.style.display = 'block';
   lastTime = null; target = null; targets = [];
   postHitGuardUntil = 0;
   expertChainActive = false; expertChainDirection = null;
@@ -918,18 +918,22 @@ function startGame(mode) {
 }
 
 function goMenu() {
-  gameRunning = false; target = null; targets = [];
-  postHitGuardUntil = 0;
-  expertChainActive = false; expertChainDirection = null;
-  clearSpawnTimers();
-  document.getElementById('menuScreen').style.display = 'flex';
-  document.getElementById('backBtn').style.display = 'none';
-  document.getElementById('shareScoreBtn').style.display = 'none';
-  ctx.clearRect(0, 0, W, H);
-  ctx.drawImage(IMG.bg, 0, 0, W, H);
+  window.location.href = 'index.html';
 }
 
 IMG.bg.onload = () => { ctx.drawImage(IMG.bg, 0, 0, W, H); };
 
 resize();
 updateSmallScreenGuard();
+
+// Auto-start game if mode is defined
+if (window.GAME_MODE) {
+  const checkLoad = () => {
+    if (IMG.bg.complete) {
+      startGame(window.GAME_MODE);
+    } else {
+      setTimeout(checkLoad, 50);
+    }
+  };
+  checkLoad();
+}
