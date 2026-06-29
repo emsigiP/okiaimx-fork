@@ -24,11 +24,20 @@ function loadImg(src) {
   img.src = src;
   return img;
 }
+const targetColor = localStorage.getItem('targetColor') || 'yellow';
 const IMG = {
   ui:  loadImg("images/ui.jpg"),
   bg:  loadImg("images/bg.jpg"),
-  r2l: [loadImg("images/r2l_1.png"), loadImg("images/r2l_2.png"), loadImg("images/r2l_3.png")],
-  l2r: [loadImg("images/l2r_1.png"), loadImg("images/l2r_2.png"), loadImg("images/l2r_3.png")],
+  r2l: [
+    loadImg(`images/${targetColor}_r2l_1.png`),
+    loadImg(`images/${targetColor}_r2l_2.png`),
+    loadImg(`images/${targetColor}_r2l_3.png`)
+  ],
+  l2r: [
+    loadImg(`images/${targetColor}_l2r_1.png`),
+    loadImg(`images/${targetColor}_l2r_2.png`),
+    loadImg(`images/${targetColor}_l2r_3.png`)
+  ],
 };
 
 // ── Sound Effects ──────────────────────────────────────────────────
@@ -915,6 +924,30 @@ IMG.bg.onload = () => { ctx.drawImage(IMG.bg, 0, 0, W, H); };
 
 resize();
 updateSmallScreenGuard();
+
+// Settings Panel Control
+function initSettings() {
+  const col = localStorage.getItem('targetColor') || 'yellow';
+  const yellowBtn = document.getElementById('colorYellowBtn');
+  const redBtn = document.getElementById('colorRedBtn');
+  if (yellowBtn && redBtn) {
+    if (col === 'red') {
+      yellowBtn.classList.remove('active');
+      redBtn.classList.add('active');
+    } else {
+      yellowBtn.classList.add('active');
+      redBtn.classList.remove('active');
+    }
+  }
+}
+
+function setTargetColor(col) {
+  localStorage.setItem('targetColor', col);
+  initSettings();
+}
+
+// Initialize settings state on script load
+initSettings();
 
 // Auto-start game if mode is defined
 if (window.GAME_MODE) {

@@ -26,6 +26,11 @@
       <div class="expert-button-row">
         <button class="menu-btn expert-btn" onclick="window.location.href='expert.html'">Expert</button>
       </div>
+      <div class="settings-panel">
+        <span class="settings-label">Target Outline:</span>
+        <button id="colorYellowBtn" class="setting-btn active" onclick="setTargetColor('yellow')">Yellow</button>
+        <button id="colorRedBtn" class="setting-btn" onclick="setTargetColor('red')">Red</button>
+      </div>
     </div>
     <div id="scoreCheckPanel" class="score-check-panel" aria-label="score verification panel">
       <button class="close-score-check" onclick="closeScoreCheckPanel()" aria-label="Close">×</button>
