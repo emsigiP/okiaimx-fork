@@ -802,8 +802,8 @@ function tickOnlineCount() {
   const amount = 1 + Math.floor(Math.random() * 4);
   const direction = chooseOnlineDirection();
   onlineCount = Math.max(1, onlineCount + direction * amount);
-  updateOnlineCountDisplay();
-  scheduleOnlineCountTick();
+  // updateOnlineCountDisplay();
+  // scheduleOnlineCountTick();
 }
 
 function scheduleOnlineCountTick() {
@@ -813,8 +813,8 @@ function scheduleOnlineCountTick() {
   onlineTimer = setTimeout(tickOnlineCount, delay);
 }
 
-updateOnlineCountDisplay();
-scheduleOnlineCountTick();
+// updateOnlineCountDisplay();
+// scheduleOnlineCountTick();
 
 // ── Score Share ───────────────────────────────────────────────────
 function downloadGameScreenshot() {
