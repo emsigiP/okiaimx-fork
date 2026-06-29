@@ -8,12 +8,21 @@ function resize() {
   const ratio = 16 / 9;
   if (vw / vh > ratio) { H = vh; W = Math.round(H * ratio); }
   else                  { W = vw; H = Math.round(W / ratio); }
-  canvas.width  = W;
-  canvas.height = H;
-  wrapper.style.width  = W + 'px';
-  wrapper.style.height = H + 'px';
-  document.getElementById('backBtn').style.fontSize = (W * 0.012) + 'px';
-  detectSlit(); // recalc slit when resize
+  if (canvas) {
+    canvas.width  = W;
+    canvas.height = H;
+  }
+  if (wrapper) {
+    wrapper.style.width  = W + 'px';
+    wrapper.style.height = H + 'px';
+  }
+  const backBtn = document.getElementById('backBtn');
+  if (backBtn) {
+    backBtn.style.fontSize = (W * 0.012) + 'px';
+  }
+  if (canvas) {
+    detectSlit(); // recalc slit when resize
+  }
 }
 window.addEventListener('resize', resize);
 window.addEventListener('orientationchange', () => setTimeout(resize, 100));
@@ -928,16 +937,10 @@ updateSmallScreenGuard();
 // Settings Panel Control
 function initSettings() {
   const col = localStorage.getItem('targetColor') || 'yellow';
-  const yellowBtn = document.getElementById('colorYellowBtn');
-  const redBtn = document.getElementById('colorRedBtn');
-  if (yellowBtn && redBtn) {
-    if (col === 'red') {
-      yellowBtn.classList.remove('active');
-      redBtn.classList.add('active');
-    } else {
-      yellowBtn.classList.add('active');
-      redBtn.classList.remove('active');
-    }
+  const selectEl = document.getElementById('outlineSelect');
+  if (selectEl) {
+    selectEl.value = col;
+    selectEl.className = 'settings-select ' + col;
   }
 }
 

@@ -538,4 +538,44 @@ body {
   text-shadow: 0 0 8px #ff3333;
   box-shadow: 0 0 12px rgba(255,51,51,0.35);
   background: rgba(255,51,51,0.12);
-}
+}
+
+/* Settings Select Combobox */
+.settings-select {
+  background: rgba(22, 22, 22, 0.94);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  color: #fff;
+  font-size: 1.1vw;
+  padding: 0.4em 1.5em 0.4em 0.8em;
+  cursor: pointer;
+  letter-spacing: 0.08em;
+  transition: all 0.25s ease;
+  border-radius: 0.25em;
+  outline: none;
+  font-family: inherit;
+  appearance: none; /* remove default arrow */
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.4em center;
+  background-size: 1.2em;
+}
+.settings-select:hover {
+  border-color: rgba(255, 255, 255, 0.8);
+}
+.settings-select.yellow {
+  border-color: #ffd700;
+  color: #ffd700;
+  text-shadow: 0 0 6px #ffd700;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+.settings-select.red {
+  border-color: #ff3333;
+  color: #ff3333;
+  text-shadow: 0 0 6px #ff3333;
+  box-shadow: 0 0 10px rgba(255, 51, 51, 0.3);
+}
+.settings-select option {
+  background: #111;
+  color: #fff;
+  text-shadow: none;
+}
